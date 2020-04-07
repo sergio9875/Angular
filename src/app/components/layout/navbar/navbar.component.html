@@ -1,0 +1,50 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" routerLink="/">MyStore</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="/" >Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/sales">Sale</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Categories
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+          <a
+            class="dropdown-item"
+            [routerLink]="['/categories', category.id ]"
+            *ngFor="let category of categories"
+          >{{ category.name }}</a>
+
+        </div>
+      </li>
+
+
+
+
+    </ul>
+    <div [hidden]="!cartItems">
+
+
+      <svg class="bi bi-bag" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M14 5H2v9a1 1 0 001 1h10a1 1 0 001-1V5zM1 4v10a2 2 0 002 2h10a2 2 0 002-2V4H1z" clip-rule="evenodd"/>
+        <path d="M8 1.5A2.5 2.5 0 005.5 4h-1a3.5 3.5 0 117 0h-1A2.5 2.5 0 008 1.5z"/>
+      </svg>
+
+      <span class="badge badge-info m-3">{{ cartItems }} Items</span>
+
+      <button class="btn btn-info ml-3" routerLink="/cart">
+        Checkout
+      </button>
+
+    </div>
+  </div>
+</nav>

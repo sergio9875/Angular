@@ -1,0 +1,10 @@
+<div
+  class="card m-2"
+  style="width: 18rem;"
+>
+  <div class="card-body">
+    <h5 class="card-title">{{ product.name }}</h5>
+    <p class="card-text">{{ product.price }}</p>
+    <a (click)="addToCart(product)" class="btn btn-outline-primary">Add to Cart</a>
+  </div>
+</div>
