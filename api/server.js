@@ -20,21 +20,16 @@ server.use( bodyParser.json() );
 //  Data
 
 const data = {
-  categories: [
-    {
-      id: faker.random.uuid(),
-      name: 'Computer Science'
-    },
-    {
-      id: faker.random.uuid(),
-      name: 'Novels'
-    },
-    {
-      id: faker.random.uuid(),
-      name: 'Cooking Books'
-    }
-  ],
+  categories: [],
   products: []
+}
+
+//  Fill in categories with fake data
+for(let i=0; i < 3; i++) {
+  data.categories.push({
+    id: faker.random.uuid(),
+    name: faker.commerce.department(),
+  })
 }
 
 //  Fill in products with fake data
@@ -44,12 +39,17 @@ for(let i=0; i < 20; i++) {
 
   data.products.push({
     id: faker.random.uuid(),
-    name: 'A book on ' + faker.commerce.productName(),
+    name: faker.commerce.productName(),
+    description: faker.lorem.lines(2),
+    image: faker.image.image(),
     price: faker.commerce.price(),
-    categoryId: data.categories[randomCategoryIndex].id,
+    category: data.categories[randomCategoryIndex],
     onSale: Math.random() > 0.5
   })
+
 }
+
+
 
 //  Routes
 
@@ -106,7 +106,7 @@ server.get('/products/:categoryId', (req, res) => {
   if( categoryId !== undefined) {
 
     response.success = true;
-    response.data = data.products.filter( product => product.categoryId === categoryId);
+    response.data = data.products.filter( product => product.category.id === categoryId);
 
   } else {
     response.success = false;
